@@ -39,7 +39,13 @@ function lfp_login_logo_url() {
 }
 add_filter( 'login_headerurl', 'lfp_login_logo_url' );
 
-function my_login_logo_url_title() {
-    return 'Your Site Name and Info';
+function lfp_login_logo_url_title() {
+    return get_bloginfo('name');
 }
-add_filter( 'login_headertitle', 'my_login_logo_url_title' );
+add_filter( 'login_headertitle', 'lfp_login_logo_url_title' );
+
+function lfp_login_stylesheet() {
+    wp_enqueue_style( 'custom-login', plugin_dir_url(__FILE__). 'assets/css/style-login.css' );
+    wp_enqueue_script( 'custom-login', plugin_dir_url(__FILE__). 'assets/js/style-login.js',['jquery'],true );
+}
+add_action( 'login_enqueue_scripts', 'lfp_login_stylesheet' );
